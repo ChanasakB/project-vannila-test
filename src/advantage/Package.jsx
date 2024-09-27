@@ -128,7 +128,7 @@ const Package = (props) => {
             <Button
               disableRipple
               variant="contained"
-              className={`w-[251px] h-[50px] bg-[#4C71F1] hover:bg-[#4C71F1] shadow-none hover:shadow-none text-[20px] text-center font-bold rounded-[6px]`}
+              className={`w-[251px] h-[50px] bg-[#4C71F1] hover:bg-[#4C71F1] shadow-none hover:shadow-none text-[20px] text-center font-bold rounded-[6px] font-anuphan`}
             >
               ทดลองใช้ฟรี 30 วัน
             </Button>
