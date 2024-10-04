@@ -19,9 +19,9 @@ const Humberger = (props) => {
   return (
     <div>
         {isOpen ? (
-          <div className={`flex flex-col gap-[30px] h-[1000px] md:h-full`}>
+          <div className={`flex flex-col gap-[30px] h-[1000px] md:h-[1000px] lg:h-full`}>
             <ul
-              className={`flex flex-col md:hidden justify-between items-center gap-[30px]`}
+              className={`flex flex-col lg:hidden justify-between items-center gap-[30px]`}
             >
               {menu?.map((item, index) => (
                 <li key={index}>

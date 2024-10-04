@@ -38,7 +38,7 @@ const Section = () => {
           โปรแกรม HR บริหารงานบุคคล <br /> ใช้ง่าย ใช้งานผ่าน LINE OA
         </h2>
       </div>
-      <div className={`flex flex-wrap gap-[30px] justify-center md:justify-between md:items-center pb-[40px] md:pb-[60px] cursor-pointer`}>
+      <div className={`flex flex-wrap gap-[30px] justify-center lg:justify-between lg:items-center pb-[40px] md:pb-[60px] cursor-pointer md:w-[552px] m-auto`}>
       {choice.map((ele,i) => (
           <div key={i} className="flex flex-col  items-center">
             <div

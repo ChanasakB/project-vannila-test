@@ -12,12 +12,12 @@ const Navbar = () => {
   return (
     <div>
       <div
-        className={`flex justify-between items-center w-[335px] pt-[20px] pb-[30px] md:pb-[60px] md:px-0 md:pt-[40px] md:w-[1134px] m-auto`}
+        className={`flex justify-between items-center w-[335px] pt-[20px] pb-[30px] md:pb-[60px] md:px-0 md:pt-[40px]  md:w-[709px] lg:w-[1134px] m-auto`}
       >
-        <div className={`flex justify-between items-center gap-[30px]`}>
+        <div className={`flex justify-between items-center lg:gap-[30px] md:px-[30px] `}>
           <Image src="/logo.svg" width={164} height={83} alt="logo" />
           <ul
-            className={`hidden  md:flex justify-between items-center gap-[30px]`}
+            className={`hidden md:hidden  lg:flex justify-between items-center gap-[30px]`}
           >
             {menu.map((item, index) => (
               <li key={index}>
@@ -33,7 +33,7 @@ const Navbar = () => {
         </div>
         {isOpen ? (
           <div
-            className="text-[#4C71F1] cursor-pointer md:hidden"
+            className="text-[#4C71F1] cursor-pointer lg:hidden"
             onClick={() => setIsOpen(!isOpen)}
           >
             <CloseIcon className="w-10 h-10"/>
@@ -43,13 +43,13 @@ const Navbar = () => {
             disableRipple
             variant="contained"
             onClick={() => setIsOpen(!isOpen)}
-            className={`bg-[#DEEDFF] hover:bg-[#DEEDFF] border-none text-[#4C71F1] shadow-none w-[121px] h-[50px]  hover:shadow-none text-[20px] text-center  font-bold rounded-md md:hidden font-anuphan`}
+            className={`bg-[#DEEDFF] hover:bg-[#DEEDFF] border-none text-[#4C71F1] shadow-none w-[121px] h-[50px]  hover:shadow-none text-[20px] text-center  font-bold rounded-md block md:block lg:hidden font-anuphan`}
           >
             เมนู
           </Button>
         )}
 
-        <div className={`hidden md:flex items-center gap-[30px]`}>
+        <div className={`hidden md:hidden lg:flex items-center gap-[30px]`}>
           <Button
             disableRipple
             variant="contained"

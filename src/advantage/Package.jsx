@@ -105,11 +105,11 @@ const Package = (props) => {
             </div>
             <div>
               <p className={`text-[#00AF70] text-[20px] font-bold`}>
-                {employeeAmount * item.price} บาท/เดือน {""}
+              {(employeeAmount * item.price).toLocaleString()} บาท/เดือน {""}
                 <span
                   className={`text-black text-[16px] font-semibold line-through decoration-2`}
                 >
-                  {item.originalPrice * employeeAmount} บาท
+                  {(item.originalPrice * employeeAmount).toLocaleString()} บาท
                 </span>
               </p>
             </div>

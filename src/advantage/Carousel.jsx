@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { PrevClick } from "./PrevClick";
 import { NextClick } from "./NextClick";
 import { DotComponent } from "./DotComponent";
@@ -19,11 +19,75 @@ export const CarouselBar = () => {
   const [progressStyle, setProgressStyle] = useState("w-0");
   const [activeImage, setActiveImage] = useState(0);
   const [activeStep, setActiveStep] = useState(1);
+  const touchStartRef = useRef(0);
+
+  const handleTouchStart = (e) => {
+    touchStartRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    if (window.innerWidth < 768) {
+      const touchEnd = e.touches[0].clientX;
+      const touchDiff = touchStartRef.current - touchEnd;
+  
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      timeoutRef.current = setTimeout(() => {
+        if (touchDiff > 50) {
+          if (activeImage < images.length - 1) {
+            setActiveImage((prev) => prev + 1);
+            updateProgress(activeStep + 1);
+            if (progress === 100) {
+              setProgress(50);
+              setProgressStyle("animation-full-revert");
+            }
+          }
+        } else if (touchDiff < 100) {
+          if (activeImage > 0) {
+            setActiveImage((prev) => prev - 1);
+            updateProgress(activeStep - 1);
+            setProgressStyle("animation-full-revert");
+            if (progress === 50) {
+              setProgress(0);
+              setProgressStyle("animation-1-2-revert");
+            }
+          }
+        }
+      }, 300); 
+    }
+  };
+
+  const timeoutRef = useRef(null);
+
+  const updateProgress = (step) => {
+    if (step === 1) {
+      setProgress(0);
+      setProgressStyle("w-0");
+    } else if (step === 2) {
+      setProgress(50);
+      setProgressStyle("animation-1-2");
+    } else if (step === 3) {
+      setProgress(100);
+      setProgressStyle("animation-full");
+    }
+    setActiveStep(step);
+  };
   return (
     <div
       className={`w-[335px] h-[483px] md:w-[552px] md:h-[423px] bg-[#DEEDFF] rounded-[10px] drop-shadow-md flex justify-between `}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
     >
-      <PrevClick progress={progress} setProgress={setProgress}  setProgressStyle={setProgressStyle} activeStep={activeStep} setActiveStep={setActiveStep} setActiveImage={setActiveImage}/>
+      <PrevClick
+        progress={progress}
+        setProgress={setProgress}
+        setProgressStyle={setProgressStyle}
+        activeStep={activeStep}
+        setActiveStep={setActiveStep}
+        setActiveImage={setActiveImage}
+      />
 
       <div className={`flex flex-col justify-around md:justify-between `}>
         <div
@@ -95,9 +159,22 @@ export const CarouselBar = () => {
             className={`pt-[30px] md:pt-[0]`}
           />
         </div>
-        <DotComponent setProgressStyle={setProgressStyle} activeStep={activeStep} setActiveStep={setActiveStep} setActiveImage={setActiveImage} dots={dots}/>
+        <DotComponent
+          setProgressStyle={setProgressStyle}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+          setActiveImage={setActiveImage}
+          dots={dots}
+        />
       </div>
-      <NextClick progress={progress} setProgress={setProgress}  setProgressStyle={setProgressStyle} activeStep={activeStep} setActiveStep={setActiveStep} setActiveImage={setActiveImage}/>
+      <NextClick
+        progress={progress}
+        setProgress={setProgress}
+        setProgressStyle={setProgressStyle}
+        activeStep={activeStep}
+        setActiveStep={setActiveStep}
+        setActiveImage={setActiveImage}
+      />
     </div>
   );
 };
